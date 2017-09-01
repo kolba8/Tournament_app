@@ -17,6 +17,12 @@
       <td><%= tournament.start_date %></td>
       <td><%= tournament.end_date %></td>
       <td><%= link_to 'Show', tournament_path(tournament) %></td>
+      <% if user_signed_in? %>
+      <td><%= link_to 'Edit', edit_tournament_path(tournament.id) %></td>
+      <td><%= link_to 'Delete', tournament_path(tournament.id),
+                                method: :delete,
+                                data: {confirm: "Are you sure?"}%></td>
+      <% end %>
     </tr>
   <% end %>
 </table>

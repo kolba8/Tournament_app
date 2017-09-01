@@ -21,9 +21,31 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:id])
   end
 
+  def edit
+    @tournament = Tournament.find(params[:id])
+  end
+
+  def update
+    tournament_params
+    @tournament = Tournament.find(params[:id])
+
+    if @tournament.update(tournament_params)
+      redirect_to @tournament
+    else
+      render "edit"
+    end
+  end
+
+  def destroy
+    tournament = Tournament.find(params[:id])
+    tournament.destroy
+
+    redirect_to tournaments_path
+  end
+
   private
 
   def tournament_params
-    params.require(:tournament).permit(:name,:cite,:start_date,:end_date)
+    params.require(:tournament).permit(:name,:city,:start_date,:end_date)
   end
 end
