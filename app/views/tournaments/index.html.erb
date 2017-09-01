@@ -1,0 +1,22 @@
+<h1>All tournaments</h1>
+<%= link_to "Create new tournament", new_tournament_path %>
+<p></p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>City</th>
+    <th>Start_date</th>
+    <th>End_date</th>
+  </tr>
+
+  <% @tournaments.each do |tournament| %>
+    <tr>
+      <td><%= tournament.name %></td>
+      <td><%= tournament.city %></td>
+      <td><%= tournament.start_date %></td>
+      <td><%= tournament.end_date %></td>
+      <td><%= link_to 'Show', tournament_path(tournament) %></td>
+    </tr>
+  <% end %>
+</table>
