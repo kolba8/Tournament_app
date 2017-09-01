@@ -1,0 +1,27 @@
+<h1>List of all teams:</h1>
+
+<%= link_to "Add new team", new_team_path %>
+<p></p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>City</th>
+  </tr>
+
+  <% @teams.each do |team| %>
+    <tr>
+      <td><%= team.name %></td>
+      <td><%= team.city %></td>
+      <td><%= link_to 'Show', team_path(team) %></td>
+      <% if user_signed_in? %>
+      <td><%= link_to 'Edit', edit_team_path(team.id) %></td>
+      <td><%= link_to 'Delete', team_path(team.id),
+                                method: :delete,
+                                data: {confirm: "Are you sure?"}%></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Go back", tournaments_path %>
