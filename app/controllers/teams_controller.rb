@@ -27,7 +27,7 @@ class TeamsController < ApplicationController
 
   def update
     team_params
-    @tournament = Team.find(params[:id])
+    @team = Team.find(params[:id])
 
     if @team.update(team_params)
       redirect_to @team
@@ -40,7 +40,7 @@ class TeamsController < ApplicationController
     team = Team.find(params[:id])
     team.destroy
 
-    redirect_to team_path
+    redirect_to teams_path
   end
 
   private

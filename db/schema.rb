@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901125950) do
+ActiveRecord::Schema.define(version: 20170917171921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "tournament_id"
+    t.integer "team1_id"
+    t.integer "team2_id"
+    t.integer "team1_score"
+    t.integer "team2_score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "team1_points", default: 0
+    t.integer "team2_points", default: 0
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.integer "tournament_id"
+    t.integer "team_id"
+    t.integer "sets_won"
+    t.integer "sets_lost"
+    t.integer "sets_difference"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
@@ -25,6 +48,11 @@ ActiveRecord::Schema.define(version: 20170901125950) do
   create_table "teams_tournaments", id: false, force: :cascade do |t|
     t.bigint "team_id", null: false
     t.bigint "tournament_id", null: false
+    t.integer "games_played", default: 0
+    t.integer "sets_won", default: 0
+    t.integer "sets_lost", default: 0
+    t.integer "sets_difference", default: 0
+    t.integer "points", default: 0
     t.index ["team_id", "tournament_id"], name: "index_teams_tournaments_on_team_id_and_tournament_id"
     t.index ["tournament_id"], name: "index_teams_tournaments_on_tournament_id"
   end
@@ -36,6 +64,7 @@ ActiveRecord::Schema.define(version: 20170901125950) do
     t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "Not_started"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,4 +84,9 @@ ActiveRecord::Schema.define(version: 20170901125950) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "matches", "teams", column: "team1_id"
+  add_foreign_key "matches", "teams", column: "team2_id"
+  add_foreign_key "matches", "tournaments"
+  add_foreign_key "results", "teams"
+  add_foreign_key "results", "tournaments"
 end

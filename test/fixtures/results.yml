@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tournament_id: 1
+  team_id: 1
+  sets_won: 1
+  sets_lost: 1
+  sets_difference: 1
+  points: 1
+
+two:
+  tournament_id: 1
+  team_id: 1
+  sets_won: 1
+  sets_lost: 1
+  sets_difference: 1
+  points: 1

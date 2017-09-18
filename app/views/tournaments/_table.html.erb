@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>Position</th>
+    <th>Name</th>
+    <th>Sets won</th>
+    <th>Sets lost</th>
+    <th>Sets difference</th>
+    <th>Points</th>
+  </tr>
+
+    <% tournament.teams.order(name: :asc).each do |team| %>
+      <tr>
+        <td><%= 222 %></td>
+        <td><%= team.name %></td>
+        <td><%= 2 %></td>
+        <td><%= 3 %></td>
+        <td><%= 4 %></td>
+        <td><%= 4 %></td>
+        <td><%= 4 %></td>
+      </tr>
+    <% end %>
+  </table>

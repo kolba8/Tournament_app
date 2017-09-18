@@ -1,0 +1,38 @@
+<% if @match.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@match.errors.count, "error") %> prohibited
+      this match from being saved:
+    </h2>
+
+    <ul>
+      <% @match.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for [@tournament, @match || Match.new(tournament_id: @tournament.id)] do |f| %>
+<p>
+<%= f.label :team1 %><br>
+<%= f.collection_select(:team1_id, @tournament.teams, :id, :name) %>
+</p>
+<p>
+<%= f.label :team2 %><br>
+<%= f.collection_select(:team2_id, @tournament.teams, :id, :name) %>
+</p>
+<p>
+<%= f.label :team1_score %><br>
+<%= f.select(:team1_score, [0,1,2,3])%>
+</p>
+<p>
+<%= f.label :team2_score %><br>
+<%= f.select(:team2_score, [0,1,2,3])%>
+</p>
+<p>
+<%= f.submit %>
+</p>
+<% end %>
+
+<%= link_to 'Back', tournament_path(@tournament) %>

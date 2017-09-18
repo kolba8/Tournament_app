@@ -43,9 +43,15 @@ class TournamentsController < ApplicationController
     redirect_to tournaments_path
   end
 
+  def start
+    tournament = Tournament.find(params[:id])
+    tournament.update(status: "Started")
+    redirect_to tournament_path(tournament)
+  end
+
   private
 
   def tournament_params
-    params.require(:tournament).permit(:name,:city,:start_date,:end_date)
+    params.require(:tournament).permit(:name,:city,:start_date,:end_date,team_ids: [])
   end
 end
