@@ -6,9 +6,13 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :tournaments do
+    member do
+      post "start"
+    end
     resources :matches
   end
+  
   resources :teams
 
-  get "/tournaments/:id/start", to: "tournaments#start"
+  # post "/tournaments/:id/start", to: "tournaments#start", as: "start_tournament"
 end

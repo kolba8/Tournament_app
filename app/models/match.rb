@@ -8,7 +8,6 @@ class Match < ApplicationRecord
   validate :must_be_unique
 
   after_validation :set_points
-  after_validation :update_table
 
   def must_be_two_different_teams
     if team1_id == team2_id
@@ -46,7 +45,4 @@ class Match < ApplicationRecord
     end
   end
 
-  def update_table
-    team1.tournaments.update(games_played: 1)
-  end
 end

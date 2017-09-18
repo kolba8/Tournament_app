@@ -14,5 +14,24 @@
   <strong>End_date:</strong>
   <%= @tournament.end_date %>
 </p>
+<p>
+  <strong>Participating teams:</strong>
+  <% @tournament.teams.each do |team| %>
+  <%= team.name %>,
+  <% end %>
+</p>
+
+<% if @tournament.status == "Not_started" %>
+  <%= link_to "Start tournament", start_tournament_path, method: "post" %><p></p>
+<% end %>
+
+<% if @tournament.status == "Started" %>
+  <%= link_to "Add match", new_tournament_match_path(@tournament.id) %><p></p>
+<% end %>
+
+<% if @tournament.matches.count != 0 %>
+  <h2>Matches played</h2>
+  <%= render @tournament.matches.order(created_at: :asc) %>
+<% end %>
 
 <%= link_to "Go back", tournaments_path %>
