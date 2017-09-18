@@ -17,16 +17,24 @@
 <p>
   <strong>Participating teams:</strong>
   <% @tournament.teams.each do |team| %>
-  <%= team.name %>,
+    <%= team.name%>
+      <% if team != @tournament.teams.last %>
+      <%= ", " %>
+      <% end %>
   <% end %>
 </p>
 
-<% if @tournament.status == "Not_started" %>
+<% if (@tournament.status == "Not_started" && @tournament.teams.count > 1)%>
   <%= link_to "Start tournament", start_tournament_path, method: "post" %><p></p>
 <% end %>
 
 <% if @tournament.status == "Started" %>
   <%= link_to "Add match", new_tournament_match_path(@tournament.id) %><p></p>
+<% end %>
+
+<% if @tournament.status == "Finished" %>
+  <h2>Table</h2>
+  <%= render "table" %>
 <% end %>
 
 <% if @tournament.matches.count != 0 %>

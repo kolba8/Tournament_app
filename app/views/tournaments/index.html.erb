@@ -14,16 +14,16 @@
   <% @tournaments.each do |tournament| %>
 
     <tr>
-      <td><%= tournament.name %></td>
-      <td><%= tournament.city %></td>
-      <td><%= tournament.start_date %></td>
+      <td><%= tournament.name %>&nbsp&nbsp</td>
+      <td><%= tournament.city %>&nbsp&nbsp</td>
+      <td><%= tournament.start_date %>&nbsp&nbsp</td>
       <td><%= tournament.end_date %></td>
-      <td><%= link_to 'Show', tournament_path(tournament) %></td>
+      <td>&nbsp&nbsp&nbsp<%= link_to 'Show', tournament_path(tournament) %>&nbsp|&nbsp</td>
       <% if user_signed_in? %>
-      <td><%= link_to 'Edit', edit_tournament_path(tournament.id) %></td>
+      <td><%= link_to 'Edit', edit_tournament_path(tournament.id) %>&nbsp|&nbsp</td>
       <td><%= link_to 'Delete', tournament_path(tournament.id),
                                 method: :delete,
-                                data: {confirm: "Are you sure?"}%></td>
+                                data: {confirm: "Are you sure?"}%>&nbsp</td>
       <% end %>
     </tr>
   <% end %>

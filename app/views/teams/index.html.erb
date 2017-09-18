@@ -11,12 +11,12 @@
 
   <% @teams.each do |team| %>
     <tr>
-      <td><%= team.name %></td>
-      <td><%= team.city %></td>
+      <td><%= team.name %>&nbsp&nbsp</td>
+      <td><%= team.city %>&nbsp&nbsp</td>
       <td><%= link_to 'Show', team_path(team) %></td>
       <% if user_signed_in? %>
-      <td><%= link_to 'Edit', edit_team_path(team.id) %></td>
-      <td><%= link_to 'Delete', team_path(team.id),
+      <td>&nbsp|&nbsp<%= link_to 'Edit', edit_team_path(team.id) %></td>
+      <td>&nbsp|&nbsp<%= link_to 'Delete', team_path(team.id),
                                 method: :delete,
                                 data: {confirm: "Are you sure?"}%></td>
       <% end %>

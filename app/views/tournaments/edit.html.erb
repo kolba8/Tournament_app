@@ -32,11 +32,13 @@
 <%= f.label :end_date %><br>
 <%= f.date_select :end_date, :start_year=>2010,:end_year=>2020 %>
 </p>
-<p>
-<%= f.label :end_date %><br>
-<%= f.collection_select(:team_ids, Team.all, :id, :name, {:prompt => "Please select teams"}, {:multiple => true}) %>
-</p>
-<p>
+<% if @tournament.status == "Not_started" %>
+  <p>
+  <%= f.label :end_date %><br>
+  <%= f.collection_select(:team_ids, Team.all, :id, :name, {:prompt => "Please select teams"}, {:multiple => true}) %>
+  </p>
+  <p>
+<% end %>
 <%= f.submit %>
 </p>
 <% end %>
