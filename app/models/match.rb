@@ -9,6 +9,8 @@ class Match < ApplicationRecord
 
   after_validation :set_points
 
+  after_create :update_table
+
   def must_be_two_different_teams
     if team1_id == team2_id
       errors.add(:team2_id, "must be a different teams")
@@ -42,6 +44,19 @@ class Match < ApplicationRecord
       self.team2_points = 2
     else
       self.team2_points = 3
+    end
+  end
+
+  def update_table
+    if Result.all.where(tournament_id: tournament_id).where(team_id: team1_id).count == 0
+      Result.create(tournament_id: tournament_id, team_id: team1_id, games_played: 1, sets_won: team1_score, sets_lost: team2_score, sets_difference: (team1_score-team2_score), points: team1_points)
+    else
+      Result.where(tournament_id: tournament_id).where(team_id: team1_id).update_all("games_played = games_played + 1, sets_won = sets_won+#{team1_score}, sets_lost = sets_lost+#{team2_score}, sets_difference =sets_difference+#{team1_score}-#{team2_score}, points= points+#{team1_points}")
+    end
+    if Result.all.where(tournament_id: tournament_id).where(team_id: team2_id).count == 0
+      Result.create(tournament_id: tournament_id, team_id: team2_id, games_played: 1, sets_won: team2_score, sets_lost: team1_score, sets_difference: (team2_score-team1_score), points: team2_points)
+    else
+      Result.where(tournament_id: tournament_id).where(team_id: team2_id).update_all("games_played = games_played + 1, sets_won = sets_won+#{team2_score}, sets_lost = sets_lost+#{team1_score}, sets_difference =sets_difference+#{team2_score}-#{team1_score}, points= points+#{team2_points}")
     end
   end
 

@@ -2,21 +2,22 @@
   <tr>
     <th>Position</th>
     <th>Name</th>
+    <th>Games played</th>
     <th>Sets won</th>
     <th>Sets lost</th>
     <th>Sets difference</th>
     <th>Points</th>
   </tr>
 
-    <% @tournament.teams.order(name: :asc).each do |team| %>
+    <% Result.all.where(tournament_id: @tournament.id).order(points: :desc).order(sets_difference: :desc).each_with_index do |result,index| %>
       <tr>
-        <td><%= 222 %></td>
-        <td><%= team.name %></td>
-        <td><%= 2 %></td>
-        <td><%= 3 %></td>
-        <td><%= 4 %></td>
-        <td><%= 4 %></td>
-        <td><%= 4 %></td>
+        <td><%= index +1 %></td>
+        <td><%= result.team.name %></td>
+        <td><%= result.games_played %></td>
+        <td><%= result.sets_won %></td>
+        <td><%= result.sets_lost %></td>
+        <td><%= result.sets_difference %></td>
+        <td><%= result.points %></td>
       </tr>
     <% end %>
   </table>
