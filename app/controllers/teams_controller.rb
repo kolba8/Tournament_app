@@ -43,6 +43,10 @@ class TeamsController < ApplicationController
     redirect_to teams_path
   end
 
+  def best
+    @teams = Team.all
+  end
+
   private
 
   def team_params

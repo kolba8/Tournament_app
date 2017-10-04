@@ -11,8 +11,12 @@ Rails.application.routes.draw do
     end
     resources :matches
   end
-  
-  resources :teams
+
+  resources :teams do
+    collection do
+      get "best"
+    end
+  end
 
   # post "/tournaments/:id/start", to: "tournaments#start", as: "start_tournament"
 end

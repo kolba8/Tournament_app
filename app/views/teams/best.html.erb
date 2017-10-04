@@ -1,0 +1,19 @@
+<h2>Best teams</h2>
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Games played</th>
+    <th>Games won</th>
+    <th>Win percentage</th>
+  </tr>
+
+  <% @result.each_with_index.order do |team,index| %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= team.name %></td>
+      <td><%= team.city %></td>
+      <td><%= link_to 'Show', team_path(team) %></td>
+    </tr>
+  <% end %>
+</table>
