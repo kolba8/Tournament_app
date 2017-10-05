@@ -3,17 +3,23 @@
   <tr>
     <th>Rank</th>
     <th>Name</th>
+    <th>City</th>
     <th>Games played</th>
     <th>Games won</th>
     <th>Win percentage</th>
   </tr>
 
-  <% @result.each_with_index.order do |team,index| %>
+  <% Result.all.order(points: :desc).order(sets_difference: :desc).each_with_index do |result,index| %>
     <tr>
-      <td><%= index + 1 %></td>
-      <td><%= team.name %></td>
-      <td><%= team.city %></td>
-      <td><%= link_to 'Show', team_path(team) %></td>
+      <td><%= index +1 %></td>
+      <td><%= result.team.name %></td>
+      <td><%= result.team.city %></td>
+      <td><%= result.games_played %></td>
+      <td><%= result.sets_won %></td>
+      <td><%= result.sets_lost %></td>
+      <td><%= result.sets_difference %></td>
+      <td><%= result.points %></td>
+      <td><%= link_to 'Show', team_path(result.team) %></td>
     </tr>
   <% end %>
 </table>

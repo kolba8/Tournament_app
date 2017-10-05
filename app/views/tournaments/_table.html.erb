@@ -1,23 +1,27 @@
-<table>
-  <tr>
-    <th>Position</th>
-    <th>Name</th>
-    <th>Games played</th>
-    <th>Sets won</th>
-    <th>Sets lost</th>
-    <th>Sets difference</th>
-    <th>Points</th>
-  </tr>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th>Name</th>
+      <th>Games played</th>
+      <th>Games won</th>
+      <th>Games lost</th>
+      <th>Sets difference</th>
+      <th>Points</th>
+    </tr>
+  </thead>
 
-    <% Result.all.where(tournament_id: @tournament.id).order(points: :desc).order(sets_difference: :desc).each_with_index do |result,index| %>
+  <% Result.all.where(tournament_id: @tournament.id).order(points: :desc).order(sets_difference: :desc).each_with_index do |result,index| %>
+    <tbody>
       <tr>
         <td><%= index +1 %></td>
         <td><%= result.team.name %></td>
         <td><%= result.games_played %></td>
-        <td><%= result.sets_won %></td>
-        <td><%= result.sets_lost %></td>
+        <td><%= result.games_won %></td>
+        <td><%= result.games_lost %></td>
         <td><%= result.sets_difference %></td>
         <td><%= result.points %></td>
       </tr>
     <% end %>
+    </tbody>
   </table>

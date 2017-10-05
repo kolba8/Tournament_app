@@ -1,16 +1,19 @@
 <h1>List of all teams:</h1>
 
-<%= link_to "Add new team", new_team_path %> |
-<%= link_to "Best teams ever", best_teams_path %>
+<%= link_to "Add new team", new_team_path %>
+<!-- <%= link_to "Best teams ever", best_teams_path %> -->
 <p></p>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>City</th>
-  </tr>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>City</th>
+    </tr>
+  </thead>
 
   <% @teams.each do |team| %>
+  <tbody>
     <tr>
       <td><%= team.name %></td>
       <td><%= team.city %></td>
@@ -23,6 +26,7 @@
       <% end %>
     </tr>
   <% end %>
+  </tbody>
 </table>
 
-<%= link_to "Go back", tournaments_path %>
+<!-- <%= link_to "Go back", tournaments_path %> -->
