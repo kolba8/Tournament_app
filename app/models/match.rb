@@ -61,9 +61,13 @@ class Match < ApplicationRecord
     if team1_score == 3
       Result.where(tournament_id: tournament_id).where(team_id: team1_id).update_all("games_won = games_won + 1")
       Result.where(tournament_id: tournament_id).where(team_id: team2_id).update_all("games_lost = games_lost + 1")
+      Team.where(id: team1_id).update_all("games_won = games_won + 1")
+      Team.where(id: team2_id).update_all("games_lost = games_lost + 1")
     else
       Result.where(tournament_id: tournament_id).where(team_id: team1_id).update_all("games_lost = games_lost + 1")
       Result.where(tournament_id: tournament_id).where(team_id: team2_id).update_all("games_won = games_won + 1")
+      Team.where(id: team1_id).update_all("games_lost = games_lost + 1")
+      Team.where(id: team2_id).update_all("games_won = games_won + 1")
     end
   end
 
