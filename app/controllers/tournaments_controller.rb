@@ -1,6 +1,6 @@
 class TournamentsController < ApplicationController
   def index
-    @tournaments = Tournament.paginate(page: params[:page], per_page: 10)
+    @tournaments = Tournament.all.paginate(page: params[:page], per_page: 10)
   end
 
   def new
