@@ -13,4 +13,8 @@ class Tournament < ApplicationRecord
       errors.add(:end_date, "must be at the same day or later than start_date")
     end
   end
+
+  def self.search(q)
+    Tournament.where("name LIKE :query or city like :query", query: "%#{q}%")
+  end
 end

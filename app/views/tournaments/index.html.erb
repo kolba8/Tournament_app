@@ -1,7 +1,12 @@
 <!-- <%= link_to "Check all teams", teams_path %> -->
 <h1>All tournaments</h1>
 <%= link_to "Create new tournament", new_tournament_path %>
-<p></p>
+
+<%= form_tag "/search", method: "get" do %>
+  <%= label_tag :q, "Search for:" %>
+  <%= text_field_tag :q, params[:q], placeholder: "Search for ..." %>
+  <%= submit_tag "Search" %>
+<% end %>
 
 <table class="table table-bordered">
   <thead>
@@ -31,5 +36,3 @@
   </thead>
 
 </table>
-
-<%= will_paginate @tournaments, renderer: BootstrapPagination::Rails, inner_window:1, outer_window:1 %>

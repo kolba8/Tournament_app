@@ -1,6 +1,6 @@
 class TournamentsController < ApplicationController
   def index
-    @tournaments = Tournament.all.paginate(page: params[:page], per_page: 10)
+    @tournaments = Tournament.all.order(id: :desc).paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -47,6 +47,11 @@ class TournamentsController < ApplicationController
     tournament = Tournament.find(params[:id])
     tournament.update(status: "Started")
     redirect_to tournament_path(tournament)
+  end
+
+  def search
+    @tournaments = Tournament.search(params[:q])
+    render :index
   end
 
   private

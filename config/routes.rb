@@ -18,5 +18,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "/search", to: "tournaments#search"
+
+
   # post "/tournaments/:id/start", to: "tournaments#start", as: "start_tournament"
 end
