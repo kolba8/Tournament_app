@@ -1,6 +1,8 @@
 class TournamentsController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
   def index
-    @tournaments = Tournament.all.order(id: :desc).paginate(page: params[:page], per_page: 10)
+    @tournaments = Tournament.order(sort_column + " " + sort_direction  )
   end
 
   def new
@@ -58,5 +60,13 @@ class TournamentsController < ApplicationController
 
   def tournament_params
     params.require(:tournament).permit(:name,:city,:start_date,:end_date,team_ids: [])
+  end
+
+  def sort_column
+    Tournament.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 end

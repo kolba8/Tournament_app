@@ -11,19 +11,20 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>City</th>
-      <th>Start_date</th>
-      <th>End_date</th>
+      <th><%= sortable "name" %></th>
+      <th><%= sortable "city" %></th>
+      <th><%= sortable "start_date" %></th>
+      <th><%= sortable "end_date" %></th>
     </tr>
 
-    <% @tournaments.each do |tournament| %>
+    <% for tournament in @tournaments %>
 
       <tr>
-        <td><%= tournament.name %></td>
+        <td><b><%= tournament.name %></b>
+        <%= " [" + tournament.status + "]" %></td>
         <td><%= tournament.city %></td>
-        <td><%= tournament.start_date %></td>
-        <td><%= tournament.end_date %></td>
+        <td><%= tournament.start_date.strftime("%B %e, %Y") %></td>
+        <td><%= tournament.end_date.strftime("%B %e, %Y") %></td>
         <td><%= link_to 'Show', tournament_path(tournament) %></td>
         <% if user_signed_in? %>
         <td><%= link_to 'Edit', edit_tournament_path(tournament.id) %></td>
