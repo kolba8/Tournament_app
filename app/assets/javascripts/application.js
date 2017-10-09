@@ -13,3 +13,14 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $("#tournaments th a, #tournaments .pagination a").live("click", function() {
+    $.getScript(this.href);
+    return false;
+  });
+  $("#tournaments_search input").keyup(function() {
+    $.get($("#tournaments_search").attr("action"), $("#tournaments_search").serialize(), null, "script");
+    return false;
+  });
+});

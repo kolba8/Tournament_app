@@ -2,43 +2,10 @@
 <h1>All tournaments</h1>
 <%= link_to "Create new tournament", new_tournament_path %>
 
-<%= form_tag tournaments_path, :method => 'get' do %>
-<%= hidden_field_tag :direction, params[:direction] %>
-<%= hidden_field_tag :sort, params[:sort] %>
+<%= form_tag tournaments_path, :method => 'get', :id => "tournaments_search" do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
   </p>
+  <div id="tournaments"><%= render 'tournaments' %></div>
 <% end %>
-
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th><%= sortable "name" %></th>
-      <th><%= sortable "city" %></th>
-      <th><%= sortable "start_date" %></th>
-      <th><%= sortable "end_date" %></th>
-    </tr>
-
-    <% for tournament in @tournaments %>
-
-      <tr>
-        <td><b><%= tournament.name %></b>
-        <%= " [" + tournament.status + "]" %></td>
-        <td><%= tournament.city %></td>
-        <td><%= tournament.start_date.strftime("%B %e, %Y") %></td>
-        <td><%= tournament.end_date.strftime("%B %e, %Y") %></td>
-        <td><%= link_to 'Show', tournament_path(tournament) %></td>
-        <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_tournament_path(tournament.id) %></td>
-        <td><%= link_to 'Delete', tournament_path(tournament.id),
-                                  method: :delete,
-                                  data: {confirm: "Are you sure?"}%></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </thead>
-
-</table>
-
-<%= will_paginate @products %>
