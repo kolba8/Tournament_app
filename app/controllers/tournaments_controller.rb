@@ -2,7 +2,7 @@ class TournamentsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @tournaments = Tournament.order(sort_column + " " + sort_direction  )
+    @tournaments = Tournament.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
   end
 
   def new

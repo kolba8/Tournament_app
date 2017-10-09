@@ -2,10 +2,13 @@
 <h1>All tournaments</h1>
 <%= link_to "Create new tournament", new_tournament_path %>
 
-<%= form_tag "/search", method: "get" do %>
-  <%= label_tag :q, "Search for:" %>
-  <%= text_field_tag :q, params[:q], placeholder: "Search for ..." %>
-  <%= submit_tag "Search" %>
+<%= form_tag tournaments_path, :method => 'get' do %>
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
 <% end %>
 
 <table class="table table-bordered">
@@ -37,3 +40,5 @@
   </thead>
 
 </table>
+
+<%= will_paginate @products %>
